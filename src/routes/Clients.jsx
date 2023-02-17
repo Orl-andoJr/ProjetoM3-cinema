@@ -19,26 +19,26 @@ function Clients() {
   const [create, setCreate] = useState(false)
   const [valid, setValid] = useState(false)
 
-useEffect(() =>{
-  async function ValidateEmail() {
+  useEffect(() => {
+    async function ValidateEmail() {
 
       setValid(false)
       const connection = await RequisitionAxios.Get(`/clientes?email=${values.email}`)
-      if(connection.data != 0){
+      if (connection.data != 0) {
         setValid(true)
-      }    
-  }
-  ValidateEmail()
-}, [values.email])
+      }
+    }
+    ValidateEmail()
+  }, [values.email])
 
   const handleSubmit = async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
     setValidated(true);
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       return
-    } else if(!valid) {
+    } else if (!valid) {
       const newUser = new User(values.name, values.email, values.password)
       await RequisitionAxios.Post('/clientes', newUser)
       setCreate(true)
@@ -47,74 +47,80 @@ useEffect(() =>{
     }
 
   };
-if(create) {
-  return (
-    <main className='text-center bg-dark pt-5'>
-      <h3 className='text-white'>Conta criada com sucesso!</h3>
-      <Link to='/'><button className='btn btn-light'>Voltar para Home</button></Link>
-    </main>
-  )
-}
+  if (create) {
+    return (
+      <main className='text-center bg-dark pt-5'>
+        <h3 className='text-white'>Conta criada com sucesso!</h3>
+        <Link to='/'><button className='btn btn-light'>Voltar para Home</button></Link>
+      </main>
+    )
+  }
   return (
     <main>
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="nameValidate">
-            <Form.Label>Nome completo</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="Nome"
-              value={values.name}
-              onChange={(event) => setValues((prevState) => ({ ...prevState, name: event.target.value }))}
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            <Form.Control.Feedback type="invalid">
-                Preencha com seu nome completo
-              </Form.Control.Feedback>
-          </Form.Group>
-        </Row>
+      <div className='border m-3 bg-white px-2 mx-3 py-4' style={{ borderRadius: 15 }}>
+        <div className='m-5'>
+          <div className='col-md-12 offset-md-4'>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="4" controlId="nameValidate">
+                <Form.Label><strong>Nome completo</strong></Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nome"
+                  value={values.name}
+                  onChange={(event) => setValues((prevState) => ({ ...prevState, name: event.target.value }))}
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Preencha com seu nome completo
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
 
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="emailValidate">
-            <Form.Label>Username</Form.Label>
-            <InputGroup hasValidation>
-              <Form.Control
-                type="text"
-                placeholder="Email"
-                aria-describedby="inputGroupPrepend"
-                required
-                isValid ={valid}
-                isInvalid={valid}
-                value={values.email}
-                onChange={(event) => setValues((prevState) => ({ ...prevState, email: event.target.value }))}
-              />
-              <Form.Control.Feedback type="invalid">
-                Email inválido ou já cadastrado.
-              </Form.Control.Feedback>
-            </InputGroup>
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="passwordValidate">
-            <Form.Label>Senha</Form.Label>
-            <Form.Control
-              required
-              type="password"
-              placeholder="Senha"
-              value={values.password}
-              onChange={(event) => setValues((prevState) => ({ ...prevState, password: event.target.value }))}
-            />
-            <Form.Control.Feedback type="invalid">
-                Preencha com uma senha.
-              </Form.Control.Feedback>
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          </Form.Group>
-        </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="4" controlId="emailValidate">
+                <Form.Label><strong>Username</strong></Form.Label>
+                <InputGroup hasValidation>
+                  <Form.Control
+                    type="text"
+                    placeholder="Email"
+                    aria-describedby="inputGroupPrepend"
+                    required
+                    isValid={valid}
+                    isInvalid={valid}
+                    value={values.email}
+                    onChange={(event) => setValues((prevState) => ({ ...prevState, email: event.target.value }))}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Email inválido ou já cadastrado.
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="4" controlId="passwordValidate">
+                <Form.Label><strong>Senha</strong></Form.Label>
+                <Form.Control
+                  required
+                  type="password"
+                  placeholder="Senha"
+                  value={values.password}
+                  onChange={(event) => setValues((prevState) => ({ ...prevState, password: event.target.value }))}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Preencha com uma senha.
+                </Form.Control.Feedback>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+            </Row>
 
-        <Button type="submit">Submit form</Button>
-      </Form>
-    </main>
+            <Button type="submit">Cadastrar</Button>
+          </Form>
+        </div>
+      </div>
+    </div>
+    </main >
 
   );
 }

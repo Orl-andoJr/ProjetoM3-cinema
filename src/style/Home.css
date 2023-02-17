@@ -7,3 +7,48 @@
     text-align: center;
 }
 
+.colunasHome{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    width: 900px;
+}
+
+p{
+    width: 450px;
+}
+
+.fotosHome{
+    width: 350px;
+    height: 525px;
+}
+
+.centroHome{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radioMain{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.centroCadastro{
+    display: flex;
+    justify-content: center;
+    /* width: 900px; */
+}
+
+form{
+    width: 900px;
+    justify-content: center;
+}
+
+.formHome{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
